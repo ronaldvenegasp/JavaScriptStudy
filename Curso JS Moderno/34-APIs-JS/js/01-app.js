@@ -1,20 +1,23 @@
 const notificarBtn = document.querySelector("#notificar");
+
 notificarBtn.addEventListener("click", () => {
-    Notification.requestPermission()
-        .then((resultado) => console.log(resultado))
-        .catch((error) => console.error(`Error: ${error}`));
+    // Utilizando Notification API
+    Notification.requestPermission().then((result) =>
+        console.log(`El resultado es ${result}`)
+    );
 });
 
 const verNotificacion = document.querySelector("#verNotificacion");
-verNotificacion.addEventListener("click", () => {
-  if (Notification.permission === "granted") {
-    const notificación = new Notification("Esta es la notificación", {
-      icon: "../img/ccj.png",
-      body: "Código con Juan, aprende con proyectos reales"
-    });
 
-    notificación.onclick = () => {
-      window.open("https://www.codigoconjuan.com");
+verNotificacion.addEventListener("click", () => {
+    // Creando una nueva notificación una vez el usuario dio permiso
+    if (Notification.permission === "granted") {
+        const notificacion = new Notification("Esta es la notificación", {
+            icon: "img/ccj.png",
+            body: "Código con Juan, aprende con proyectos reales",
+        });
+
+        notificacion.onclick = () =>
+            window.open("https://www.codigoconjuan.com");
     }
-  }
 });
